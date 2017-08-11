@@ -3,10 +3,13 @@ var fs = require('fs'); // npm install fs
 
 var JSON_FILE_PATH = "jsonFile/excelOutput.json";
 var EXCEL_FILE_PATH = "excelFile/multpileSheet.xlsx";
-
+var CONFIG_FILE = "sheetConfig.json";
 var workbook = XLSX.readFile(EXCEL_FILE_PATH);
 var sheetNames = workbook.SheetNames;
 
+// sheetConfig file writing
+var config = '[{"sheetCount":'+sheetNames.length+'}]';
+var configFile = fs.writeFile(CONFIG_FILE, config);
 
 var file = fs.statSync(JSON_FILE_PATH);
 if(file.size > 0) {
